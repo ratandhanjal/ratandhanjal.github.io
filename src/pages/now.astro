@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import profileData from '../data/profile.json';
+import habitsData from '../data/habits.json';
+
+const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+
+<Layout title="Now | Ratan Dhanjal">
+  <div class="container page-container fade-in">
+    <header class="page-header stagger-1">
+      <h1 class="font-serif">Now</h1>
+      <p class="subtitle">What I'm focused on right now.</p>
+      <p class="updated-text">Last updated: {lastUpdated}</p>
+    </header>
+
+    <div class="content-grid stagger-2">
+      <section class="now-section">
+        <h2>Professional Focus</h2>
+        <p>
+          I'm currently working at <strong>Sopra Steria India</strong> as a Module DevOps Lead, driving CI/CD, cloud infrastructure, and security initiatives across AKS environments for enterprise programs. I am also leading Terraform-based architecture improvements and GitOps deployments.
+        </p>
+      </section>
+
+      <section class="now-section">
+        <h2>Current Learning</h2>
+        <ul class="clean-list">
+          <li>Deepening expertise in Kubernetes architectures.</li>
+          <li>Exploring AI integrations within DevOps pipelines.</li>
+          <li>Improving my technical writing.</li>
+        </ul>
+      </section>
+
+      <section class="now-section">
+        <h2>Habits & Routines</h2>
+        <div class="habits-grid">
+          <div class="habit-group">
+            <h3>Maintaining</h3>
+            <ul class="clean-list">
+              {habitsData.maintained.map(habit => (
+                <li>
+                  <strong>{habit.name}</strong>
+                  <span class="habit-desc">{habit.description}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="habit-group">
+            <h3>Building</h3>
+            <ul class="clean-list">
+              {habitsData.building.map(habit => (
+                <li>
+                  <strong>{habit.name}</strong>
+                  <span class="habit-desc">{habit.description}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-container {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-4xl);
+    max-width: 700px;
+  }
+
+  .page-header {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .subtitle {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  
+  .updated-text {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+    margin-top: var(--space-sm);
+  }
+
+  .now-section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .now-section h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .now-section p, .clean-list li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .clean-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .clean-list li {
+    margin-bottom: var(--space-sm);
+    position: relative;
+    padding-left: var(--space-md);
+  }
+  
+  .clean-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--text-tertiary);
+  }
+
+  .habits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .habit-group h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-color);
+  }
+  
+  .habit-desc {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+
+  .stagger-1, .stagger-2 {
+    opacity: 0;
+    animation: slideUp var(--transition-slow) forwards;
+  }
+  
+  @media (max-width: 600px) {
+    .habits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

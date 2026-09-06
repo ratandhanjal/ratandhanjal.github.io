@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import profileData from '../data/profile.json';
+---
+
+<Layout title={profileData.seo.title} description={profileData.seo.description}>
+  <section class="hero-section flex flex-col items-center justify-center fade-in">
+    <div class="container text-center">
+      <div id="profile-img-trigger" class="profile-image-container hover-zoom" title="Click to zoom">
+        <img src="/images/Ratan_Dhanjal.png" alt={profileData.name} class="profile-image" />
+      </div>
+      
+      <!-- Image Zoom Overlay -->
+      <div id="image-overlay" class="image-overlay" aria-hidden="true">
+        <button id="close-overlay" class="close-btn" aria-label="Close zoom">&times;</button>
+        <img src="/images/Ratan_Dhanjal.png" alt={profileData.name} class="zoomed-image" />
+      </div>
+      
+      <p class="tag stagger-1">Hello, World.</p>
+      <h1 class="stagger-2 font-serif title">I'm {profileData.name}</h1>
+      <h2 class="stagger-3 subtitle">{profileData.role}</h2>
+      
+      <p class="stagger-4 bio">
+        {profileData.bio}
+      </p>
+      
+      <div class="flex justify-center gap-md stagger-5 mt-lg">
+        <a href="/work" class="btn btn-primary">View My Work</a>
+        <a href="/about" class="btn">About Me</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('profile-img-trigger');
+    const overlay = document.getElementById('image-overlay');
+    const closeBtn = document.getElementById('close-overlay');
+    const zoomedImg = overlay?.querySelector('.zoomed-image') as HTMLImageElement;
+
+    if (trigger && overlay && closeBtn && zoomedImg) {
+      trigger.addEventListener('click', () => {
+        const rect = trigger.getBoundingClientRect();
+        
+        // Initial state (matches the trigger)
+        zoomedImg.style.top = `${rect.top}px`;
+        zoomedImg.style.left = `${rect.left}px`;
+        zoomedImg.style.width = `${rect.width}px`;
+        zoomedImg.style.height = `${rect.height}px`;
+        zoomedImg.style.transform = 'none';
+        
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // prevent scrolling
+        
+        // Force reflow to apply initial positions before transitioning
+        void zoomedImg.offsetWidth;
+        
+        // Target state (centered and enlarged)
+        const size = Math.min(window.innerWidth * 0.9, window.innerHeight * 0.9, 500);
+        zoomedImg.style.top = '50%';
+        zoomedImg.style.left = '50%';
+        zoomedImg.style.width = `${size}px`;
+        zoomedImg.style.height = `${size}px`;
+        zoomedImg.style.transform = 'translate(-50%, -50%)';
+      });
+
+      const closeZoom = () => {
+        const rect = trigger.getBoundingClientRect();
+        
+        // Animate back to original position
+        zoomedImg.style.top = `${rect.top}px`;
+        zoomedImg.style.left = `${rect.left}px`;
+        zoomedImg.style.width = `${rect.width}px`;
+        zoomedImg.style.height = `${rect.height}px`;
+        zoomedImg.style.transform = 'none';
+        
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      closeBtn.addEventListener('click', closeZoom);
+      overlay.addEventListener('click', (e) => {
+        // Close if clicking outside the image
+        if (e.target === overlay) {
+          closeZoom();
+        }
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          closeZoom();
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .hero-section {
+    min-height: calc(100vh - 200px); /* Adjust based on header/footer */
+    padding: var(--space-3xl) 0;
+  }
+
+  .profile-image-container {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto var(--space-xl) auto;
+    border-radius: var(--radius-full);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 4px solid var(--border-color);
+    cursor: zoom-in;
+  }
+  
+  /* Zoom Overlay Styles */
+  .image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(5px);
+  }
+
+  .image-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: zoom-out;
+  }
+
+  .zoomed-image {
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: absolute;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+    margin: 0;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10000;
+    transition: transform 0.2s ease;
+  }
+
+  .close-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  :global([data-theme='dark']) .profile-image-container {
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+  }
+
+  .title {
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-xs);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+  
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .subtitle {
+    margin-top: 0;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom: var(--space-xl);
+  }
+
+  .bio {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    color: var(--text-color);
+    line-height: 1.8;
+  }
+  
+  .mt-lg {
+    margin-top: var(--space-xl);
+  }
+
+  /* Apply stagger animations from global if elements are block level */
+  .tag, .title, .subtitle, .bio, .mt-lg {
+    opacity: 0;
+    animation: slideUp var(--transition-slow) forwards;
+  }
+</style>

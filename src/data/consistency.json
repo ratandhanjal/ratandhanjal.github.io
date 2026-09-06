@@ -1,0 +1,70 @@
+{
+  "stats": {
+    "currentStreak": 122,
+    "longestStreak": 245,
+    "studyDays": 120,
+    "booksCompleted": 5,
+    "articlesWritten": 22,
+    "projectsCompleted": 80
+  },
+  "tasks": [
+    {
+      "id": "linkedin",
+      "name": "Linkedin post",
+      "startDate": "2026-09-01"
+    },
+    {
+      "id": "gym",
+      "name": "Gym",
+      "startDate": "2026-09-01"
+    },
+    {
+      "id": "reading",
+      "name": "Reading book",
+      "startDate": "2026-09-01"
+    },
+    {
+      "id": "github",
+      "name": "Code push to github",
+      "startDate": "2026-09-03"
+    }
+  ],
+  "dailyLogs": {
+    "2026-09-01": {
+      "linkedin": true,
+      "gym": true,
+      "reading": false,
+      "github": false
+    },
+    "2026-09-02": {
+      "linkedin": true,
+      "gym": false,
+      "reading": true,
+      "github": false
+    },
+    "2026-09-03": {
+      "linkedin": true,
+      "gym": false,
+      "reading": true,
+      "github": true
+    },
+    "2026-09-04": {
+      "linkedin": true,
+      "gym": true,
+      "reading": true,
+      "github": true
+    },
+    "2026-09-05": {
+      "linkedin": true,
+      "gym": true,
+      "reading": false,
+      "github": false
+    },
+    "2026-09-06": {
+      "linkedin": true,
+      "gym": true,
+      "reading": true,
+      "github": false
+    }
+  }
+}

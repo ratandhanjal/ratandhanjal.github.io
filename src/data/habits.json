@@ -1,0 +1,11 @@
+{
+  "maintained": [
+    { "name": "Infrastructure as Code", "description": "Daily practice writing or reviewing IaC." },
+    { "name": "Technical Reading", "description": "Reading documentation, blogs, or books." },
+    { "name": "Fitness", "description": "Working out 4 times a week." }
+  ],
+  "building": [
+    { "name": "Writing", "description": "Publishing one technical article per month." },
+    { "name": "Open Source", "description": "Contributing to open source projects regularly." }
+  ]
+}

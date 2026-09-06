@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Ratan Dhanjal</title>
+  <meta name="description" content="Learn more about Ratan Dhanjal, an experienced Cloud and DevOps Engineer.">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="fade-out">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </span>
+        Ratan<span class="text-gradient">Dhanjal</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"></button>
+      </nav>
+
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link active">About</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main style="padding-top: 100px;">
+    <section class="section" style="min-height: auto; padding: var(--space-xl) 0;">
+      <div class="container">
+        
+        <div class="reveal">
+          <h1 class="text-gradient" style="margin-bottom: var(--space-xs);">About Me</h1>
+          <p style="font-size: 1.125rem;">Building robust, scalable, and secure cloud solutions.</p>
+        </div>
+
+        <div class="flex flex-col gap-lg" style="margin-top: var(--space-xl);">
+          
+          <div class="card glass reveal-left">
+            <h3>Professional Overview</h3>
+            <p>
+              I am a seasoned Cloud and DevOps Engineer with 7 years of deep expertise in DevOps practices. I bring a wealth of experience in automating infrastructure on Azure using Terraform and Azure DevOps. 
+            </p>
+            <p>
+              My professional journey has been focused on bridging the gap between development and operations. I excel in delivering robust, scalable, and secure cloud solutions that drive innovation and efficiency for organizations embarking on or optimizing their cloud journey.
+            </p>
+          </div>
+
+          <div class="card glass reveal-right">
+            <h3>Key Achievements & Philosophy</h3>
+            <p>
+              My most significant achievements involve implementing end-to-end CI/CD pipelines, ensuring Infrastructure as Code (IaC) compliance, and drastically optimizing resource provisioning workflows.
+            </p>
+            <p>
+              I believe in the power of automation, observability, and security by design. By integrating security scanning (like TFSec and TruffleHog) proactively into code repositories and utilizing Git-based version control, I ensure that cloud environments are not just fast to deploy, but safe and compliant.
+            </p>
+          </div>
+
+          <div class="card glass reveal-left">
+            <h3>Areas of Expertise</h3>
+            <div class="tags" style="margin-top: 0;">
+              <span class="tag">Azure Infrastructure</span>
+              <span class="tag">Infrastructure as Code (Terraform, ARM)</span>
+              <span class="tag">CI/CD Pipelines</span>
+              <span class="tag">Containerization (Docker, Kubernetes/AKS)</span>
+              <span class="tag">Scripting (Bash, PowerShell)</span>
+              <span class="tag">Cloud Security & Networking</span>
+              <span class="tag">Monitoring (Azure Monitor, Log Analytics)</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top: 0; padding-top: var(--space-xl);">
+        <p>&copy; <span id="year">2026</span> Ratan Dhanjal. All rights reserved. | ratandhanjal.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.onload = () => {
+      document.body.classList.remove('fade-out');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Ratan Dhanjal`}>
+  <div class="container article-container fade-in">
+    <header class="article-header stagger-1">
+      <div class="top-nav">
+        <a href="/blog" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          Back to all articles
+        </a>
+      </div>
+      <div class="header-content">
+        <div class="header-text">
+          <div class="article-meta">
+            <span class="tag">{post.data.category}</span>
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </time>
+            {post.data.readingTime && <span class="reading-time">· {post.data.readingTime} read</span>}
+          </div>
+          <h1 class="font-serif">{post.data.title}</h1>
+        </div>
+        
+        {post.data.coverImage && (
+          <div class="cover-image-container-small">
+            <img src={post.data.coverImage} alt={post.data.title} class="cover-image-small" />
+          </div>
+        )}
+      </div>
+    </header>
+
+    <article class="article-content stagger-2">
+      <Content />
+    </article>
+    
+    <div class="article-footer stagger-3">
+      <a href="/blog" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Back to all articles
+      </a>
+    </div>
+  </div>
+
+  <!-- Lightbox Container -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <button class="lightbox-btn lightbox-prev" aria-label="Previous image">&#10094;</button>
+    
+    <div class="lightbox-content-wrapper">
+      <img class="lightbox-content" id="lightbox-img" />
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+    
+    <button class="lightbox-btn lightbox-next" aria-label="Next image">&#10095;</button>
+  </div>
+</Layout>
+
+<style>
+  .article-container {
+    max-width: 720px;
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-4xl);
+  }
+
+  .article-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .top-nav {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .header-text {
+    flex: 1;
+  }
+
+  .cover-image-container-small {
+    width: 160px; /* Slightly wider for better visibility */
+    height: auto;
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+
+  .cover-image-small {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .header-content {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .cover-image-container-small {
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+  /* Markdown Content Styling */
+  .article-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-color);
+  }
+
+  /* Inline Image Styling */
+  .article-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: var(--space-xl) 0;
+    border: 1px solid var(--border-color);
+    cursor: zoom-in;
+    transition: transform var(--transition-fast);
+  }
+  
+  .article-content :global(img:hover) {
+    transform: scale(1.02);
+  }
+
+  .article-content :global(h2) {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .article-content :global(h3) {
+    font-size: 1.25rem;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .article-content :global(p) {
+    margin-bottom: var(--space-lg);
+    color: var(--text-secondary);
+  }
+  
+  .article-content :global(a) {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-color: var(--border-color-hover);
+    text-underline-offset: 4px;
+  }
+  
+  .article-content :global(a:hover) {
+    text-decoration-color: var(--text-color);
+  }
+
+  .article-content :global(ul), .article-content :global(ol) {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-xl);
+    color: var(--text-secondary);
+  }
+
+  .article-content :global(li) {
+    margin-bottom: var(--space-sm);
+  }
+
+  .article-content :global(pre) {
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-color-secondary) !important;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    margin-bottom: var(--space-lg);
+  }
+  
+  .article-content :global(code) {
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+  
+  .article-content :global(p > code) {
+    background-color: var(--bg-color-secondary);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+  }
+
+  .article-content :global(blockquote) {
+    border-left: 4px solid var(--border-color-hover);
+    padding-left: var(--space-lg);
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: var(--space-lg);
+    font-style: italic;
+    color: var(--text-tertiary);
+  }
+
+  .article-footer {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .back-link:hover {
+    color: var(--text-color);
+  }
+
+  .stagger-1, .stagger-2, .stagger-3 {
+    opacity: 0;
+    animation: slideUp var(--transition-slow) forwards;
+  }
+
+  /* Lightbox Styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+  }
+
+  .lightbox.active {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lightbox-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    height: 100%;
+  }
+
+  .lightbox-content {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s ease;
+    transition: transform 0.2s ease-out; /* Smooth transform for panning/zooming */
+    cursor: zoom-in;
+    user-select: none;
+  }
+
+  @keyframes zoomIn {
+    from {transform:scale(0.95); opacity: 0;}
+    to {transform:scale(1); opacity: 1;}
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 10000;
+  }
+
+  .lightbox-close:hover {
+    color: var(--border-color-hover);
+  }
+
+  .lightbox-caption {
+    margin-top: 15px;
+    color: #ddd;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .lightbox-btn {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 40px;
+    font-weight: bold;
+    padding: 20px;
+    transition: 0.2s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .lightbox-btn:hover {
+    color: white;
+    background-color: rgba(255,255,255,0.05);
+  }
+
+  @media (max-width: 600px) {
+    .lightbox-btn {
+      padding: 10px;
+      font-size: 30px;
+    }
+    .lightbox-content-wrapper {
+      max-width: 90%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    
+    // Select all images inside the markdown content
+    const images = Array.from(document.querySelectorAll('.article-content img'));
+    let currentIndex = 0;
+
+    if (images.length === 0) return;
+
+    // Attach click listeners to all article images
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index;
+        updateLightbox();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent page scrolling
+      });
+    });
+
+    const updateLightbox = () => {
+      const currentImg = images[currentIndex];
+      lightboxImg.src = currentImg.src;
+      lightboxCaption.innerHTML = currentImg.alt || '';
+      
+      // Hide next/prev arrows if there's only 1 image in the post
+      if (images.length <= 1) {
+        prevBtn.style.visibility = 'hidden';
+        nextBtn.style.visibility = 'hidden';
+      } else {
+        prevBtn.style.visibility = 'visible';
+        nextBtn.style.visibility = 'visible';
+      }
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    };
+
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Click outside image to close
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) {
+        closeLightbox();
+      }
+    });
+
+    // Navigation logic
+    const navigate = (direction) => {
+      currentIndex = (currentIndex + direction + images.length) % images.length;
+      updateLightbox();
+      resetZoom();
+    };
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigate(-1);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigate(1);
+    });
+
+    // Zoom and Pan Logic
+    let scale = 1;
+    let isDragging = false;
+    let startX = 0, startY = 0, translateX = 0, translateY = 0;
+
+    const resetZoom = () => {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      lightboxImg.style.transform = `translate(0px, 0px) scale(1)`;
+      lightboxImg.style.cursor = 'zoom-in';
+      lightboxImg.style.transition = 'transform 0.2s ease-out';
+    };
+
+    lightboxImg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (scale === 1) {
+        scale = 2.5; // Zoom factor
+        lightboxImg.style.cursor = 'grab';
+        lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      } else {
+        resetZoom();
+      }
+    });
+
+    lightboxImg.addEventListener('mousedown', (e) => {
+      if (scale > 1) {
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        lightboxImg.style.cursor = 'grabbing';
+        lightboxImg.style.transition = 'none'; // Remove transition for instant drag following
+        e.preventDefault(); // Prevent default image drag behavior
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      if (scale > 1) lightboxImg.style.cursor = 'grab';
+      lightboxImg.style.transition = 'transform 0.2s ease-out';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging || scale === 1) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    });
+
+    // Support wheel to zoom in/out
+    lightboxImg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const zoomSensitivity = 0.1;
+      if (e.deltaY < 0) {
+        scale = Math.min(scale + zoomSensitivity, 5); // Max zoom 5x
+      } else {
+        scale = Math.max(scale - zoomSensitivity, 1); // Min zoom 1x
+      }
+      
+      if (scale === 1) {
+        resetZoom();
+      } else {
+        lightboxImg.style.cursor = 'grab';
+        lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      }
+    }, { passive: false });
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' && images.length > 1) {
+        navigate(-1);
+      }
+      if (e.key === 'ArrowRight' && images.length > 1) {
+        navigate(1);
+      }
+    });
+  });
+</script>

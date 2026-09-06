@@ -1,0 +1,99 @@
+/* ===== Animations & Transitions ===== */
+
+/* Page Transition */
+body.fade-out {
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+/* Scroll Reveal Classes (Intersection Observer) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered Children Reveal */
+.stagger-container .stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.stagger-container.active .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add delays for stagger items */
+.stagger-container.active .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+.stagger-container.active .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+.stagger-container.active .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+.stagger-container.active .stagger-item:nth-child(4) { transition-delay: 0.4s; }
+.stagger-container.active .stagger-item:nth-child(5) { transition-delay: 0.5s; }
+.stagger-container.active .stagger-item:nth-child(6) { transition-delay: 0.6s; }
+
+/* Hero Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.pulse-element {
+  animation: pulse-glow 3s infinite;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .reveal, .reveal-left, .reveal-right, .stagger-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

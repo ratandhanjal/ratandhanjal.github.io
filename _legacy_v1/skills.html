@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills | Ratan Dhanjal</title>
+  <meta name="description" content="Technical skills and expertise of Ratan Dhanjal in DevOps and Cloud Engineering.">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  
+  <style>
+    .skill-category {
+      margin-bottom: var(--space-2xl);
+    }
+    .skill-category h3 {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      color: var(--accent-primary);
+    }
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-md);
+    }
+    .skill-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+    .skill-card:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="fade-out">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </span>
+        Ratan<span class="text-gradient">Dhanjal</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="skills.html" class="nav-link active">Skills</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"></button>
+      </nav>
+
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="skills.html" class="nav-link active">Skills</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main style="padding-top: 100px;">
+    <section class="section" style="min-height: auto; padding: var(--space-xl) 0;">
+      <div class="container">
+        
+        <div class="reveal">
+          <h1 class="text-gradient" style="margin-bottom: var(--space-xs);">Technical Skills</h1>
+          <p style="font-size: 1.125rem;">My technology stack and toolchain.</p>
+        </div>
+
+        <div class="stagger-container active" style="margin-top: var(--space-2xl);">
+          
+          <div class="skill-category stagger-item">
+            <h3>Cloud Platform</h3>
+            <div class="skill-grid">
+              <div class="skill-card">Microsoft Azure</div>
+              <div class="skill-card">Azure Virtual Machines</div>
+              <div class="skill-card">Azure Networking (VNet, VPN)</div>
+              <div class="skill-card">App Gateway & Load Balancer</div>
+            </div>
+          </div>
+
+          <div class="skill-category stagger-item">
+            <h3>Infrastructure as Code</h3>
+            <div class="skill-grid">
+              <div class="skill-card">Terraform</div>
+              <div class="skill-card">ARM Templates</div>
+            </div>
+          </div>
+
+          <div class="skill-category stagger-item">
+            <h3>CI/CD & Automation</h3>
+            <div class="skill-grid">
+              <div class="skill-card">Azure DevOps</div>
+              <div class="skill-card">Azure Pipelines</div>
+              <div class="skill-card">Git / GitHub</div>
+              <div class="skill-card">GitHub Actions</div>
+              <div class="skill-card">ArgoCD</div>
+            </div>
+          </div>
+
+          <div class="skill-category stagger-item">
+            <h3>Containerization</h3>
+            <div class="skill-grid">
+              <div class="skill-card">Docker</div>
+              <div class="skill-card">Kubernetes</div>
+              <div class="skill-card">Azure Kubernetes Service (AKS)</div>
+              <div class="skill-card">Azure Container Registry (ACR)</div>
+            </div>
+          </div>
+
+          <div class="skill-category stagger-item">
+            <h3>Scripting & OS</h3>
+            <div class="skill-grid">
+              <div class="skill-card">PowerShell</div>
+              <div class="skill-card">Bash</div>
+              <div class="skill-card">Azure CLI</div>
+              <div class="skill-card">Linux</div>
+              <div class="skill-card">Windows</div>
+            </div>
+          </div>
+
+          <div class="skill-category stagger-item">
+            <h3>Configuration & Security</h3>
+            <div class="skill-grid">
+              <div class="skill-card">YAML</div>
+              <div class="skill-card">JSON</div>
+              <div class="skill-card">Azure Monitor</div>
+              <div class="skill-card">TFSec</div>
+              <div class="skill-card">TruffleHog</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top: 0; padding-top: var(--space-xl);">
+        <p>&copy; <span id="year">2026</span> Ratan Dhanjal. All rights reserved. | ratandhanjal.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.onload = () => {
+      document.body.classList.remove('fade-out');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+---
+import Layout from '../layouts/Layout.astro';
+import consistencyData from '../data/consistency.json';
+import habitsData from '../data/habits.json';
+
+const { stats, tasks = [], dailyLogs = {} } = consistencyData;
+const { maintained, building } = habitsData;
+
+// Calculate 365-day heatmap averages based on daily task completion
+// Find the latest date in dailyLogs to anchor the heatmap (handles timezone differences)
+const logDates = Object.keys(dailyLogs).sort();
+const lastLogDateStr = logDates.length > 0 ? logDates[logDates.length - 1] : null;
+
+const today = new Date();
+if (lastLogDateStr) {
+  // Parse date string carefully to avoid timezone shifting backwards
+  const parts = lastLogDateStr.split('-');
+  const lastLogDate = new Date(parts[0], parts[1] - 1, parts[2]);
+  if (lastLogDate > today) {
+    today.setTime(lastLogDate.getTime());
+  }
+}
+
+const pastYearDates = [];
+
+for (let i = 364; i >= 0; i--) {
+  const d = new Date(today);
+  d.setDate(d.getDate() - i);
+  // Robust local date string format YYYY-MM-DD
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const dateStr = `${year}-${month}-${day}`; 
+  
+  // Calculate average completion for this day
+  let activeTasksCount = 0;
+  let completedTasksCount = 0;
+  
+  tasks.forEach(task => {
+    // Only count tasks that were active on or before this date
+    if (task.startDate <= dateStr) {
+      activeTasksCount++;
+      const logsForDay = dailyLogs[dateStr] || {};
+      if (logsForDay[task.id] === true) {
+        completedTasksCount++;
+      }
+    }
+  });
+
+  let level = 0;
+  if (activeTasksCount > 0) {
+    const percentage = completedTasksCount / activeTasksCount;
+    level = Math.round(percentage * 4); // Maps 0-1 to 0-4
+  }
+  
+  pastYearDates.push({
+    date: dateStr,
+    level: level
+  });
+}
+---
+
+<Layout title="Consistency Tracker | Ratan Dhanjal">
+  <div class="container page-container fade-in">
+    <header class="page-header stagger-1">
+      <h1 class="font-serif">Consistency</h1>
+      <p class="subtitle">Tracking my daily habits, learning streaks, and continuous growth.</p>
+    </header>
+
+    <!-- Scoreboard Section -->
+    <section class="scoreboard stagger-2">
+      <div class="stat-card">
+        <span class="stat-value">{stats.currentStreak}</span>
+        <span class="stat-label">Day Streak</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stats.longestStreak}</span>
+        <span class="stat-label">Longest Streak</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stats.studyDays}</span>
+        <span class="stat-label">Study Days</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stats.booksCompleted}</span>
+        <span class="stat-label">Books</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stats.articlesWritten}</span>
+        <span class="stat-label">Articles</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stats.projectsCompleted}</span>
+        <span class="stat-label">Projects</span>
+      </div>
+    </section>
+
+    <!-- Monthly Task Map Section -->
+    <section class="monthly-map-section stagger-3">
+      <div class="monthly-header">
+        <h2>Monthly Tracker</h2>
+        <div class="month-controls">
+          <button id="prev-month" class="month-btn" aria-label="Previous Month">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <span id="current-month-display"></span>
+          <button id="next-month" class="month-btn" aria-label="Next Month">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="monthly-table-container">
+        <table id="monthly-table" class="monthly-table">
+          <!-- Filled dynamically by JavaScript -->
+        </table>
+      </div>
+    </section>
+
+    <!-- Heatmap Section -->
+    <section class="heatmap-section stagger-4">
+      <h2>365-Day Activity Heatmap</h2>
+      <div class="heatmap-container">
+        <div class="heatmap-scroll-wrapper">
+          <div class="heatmap-grid">
+            {pastYearDates.map(day => (
+              <div 
+                class={`heatmap-cell level-${day.level}`} 
+                title={`${day.date}: Level ${day.level}`}
+              ></div>
+            ))}
+          </div>
+        </div>
+        <div class="heatmap-legend">
+          <span>Less</span>
+          <div class="heatmap-cell level-0"></div>
+          <div class="heatmap-cell level-1"></div>
+          <div class="heatmap-cell level-2"></div>
+          <div class="heatmap-cell level-3"></div>
+          <div class="heatmap-cell level-4"></div>
+          <span>More</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Habits Section -->
+    <section class="habits-section stagger-5">
+      <div class="habits-column">
+        <h2>Maintained Habits</h2>
+        <div class="habits-list">
+          {maintained.map(habit => (
+            <div class="habit-card hover-lift">
+              <div class="habit-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <h3>{habit.name}</h3>
+              </div>
+              <p>{habit.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="habits-column">
+        <h2>Building Habits</h2>
+        <div class="habits-list">
+          {building.map(habit => (
+            <div class="habit-card hover-lift">
+              <div class="habit-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="build-icon"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <h3>{habit.name}</h3>
+              </div>
+              <p>{habit.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script define:vars={{ tasks, dailyLogs }}>
+  // Client-side script to render the monthly table and handle arrows
+  let currentMonthDate = new Date();
+  
+  const monthDisplay = document.getElementById('current-month-display');
+  const table = document.getElementById('monthly-table');
+  
+  function getDaysInMonth(year, month) {
+    return new Date(year, month + 1, 0).getDate();
+  }
+
+  function renderMonth() {
+    if (!monthDisplay || !table) return;
+
+    const year = currentMonthDate.getFullYear();
+    const month = currentMonthDate.getMonth();
+    const daysInMonth = getDaysInMonth(year, month);
+    
+    // Update header
+    monthDisplay.textContent = currentMonthDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    
+    // Build table HTML
+    let html = '<thead><tr><th>Task</th>';
+    for (let i = 1; i <= daysInMonth; i++) {
+      html += `<th>${i}</th>`;
+    }
+    html += '</tr></thead><tbody>';
+    
+    tasks.forEach(task => {
+      html += `<tr><td class="task-name">${task.name}</td>`;
+      for (let i = 1; i <= daysInMonth; i++) {
+        // Construct date string YYYY-MM-DD
+        const mStr = String(month + 1).padStart(2, '0');
+        const dStr = String(i).padStart(2, '0');
+        const dateStr = `${year}-${mStr}-${dStr}`;
+        
+        let levelClass = 'level-0';
+        if (dateStr >= task.startDate) {
+           const logForDay = dailyLogs[dateStr];
+           if (logForDay && logForDay[task.id] === true) {
+             levelClass = 'level-4';
+           }
+        } else {
+           // Not started yet
+           levelClass = 'level-not-started';
+        }
+        
+        html += `<td class="tracker-td"><div class="heatmap-cell monthly-cell ${levelClass}" title="${task.name} on ${dateStr}"></div></td>`;
+      }
+      html += '</tr>';
+    });
+    
+    html += '</tbody>';
+    table.innerHTML = html;
+  }
+
+  document.getElementById('prev-month')?.addEventListener('click', () => {
+    currentMonthDate.setMonth(currentMonthDate.getMonth() - 1);
+    renderMonth();
+  });
+
+  document.getElementById('next-month')?.addEventListener('click', () => {
+    currentMonthDate.setMonth(currentMonthDate.getMonth() + 1);
+    renderMonth();
+  });
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', renderMonth);
+  // Also call immediately in case DOM is already loaded (Astro view transitions)
+  renderMonth();
+</script>
+
+<style>
+  .page-container {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-4xl);
+    max-width: 900px;
+  }
+
+  .page-header {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  /* Scoreboard */
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .stat-card {
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--text-color);
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: var(--font-serif);
+    color: var(--text-color);
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  /* Monthly Tracker */
+  .monthly-map-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .monthly-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .monthly-header h2 {
+    font-size: 1.75rem;
+    margin: 0;
+    font-family: var(--font-serif);
+  }
+
+  .month-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-color);
+  }
+
+  .month-btn {
+    background: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: var(--radius-sm);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+
+  .month-btn:hover {
+    background: var(--border-color);
+  }
+
+  .monthly-table-container {
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    overflow-x: auto;
+  }
+
+  .monthly-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px; /* Force horizontal scroll on small screens */
+  }
+
+  :global(.monthly-table th), :global(.monthly-table td) {
+    padding: 6px;
+    text-align: center;
+    border-bottom: 1px solid color-mix(in srgb, var(--border-color) 20%, transparent);
+  }
+
+  :global(.monthly-table th) {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding-bottom: 12px;
+  }
+
+  :global(.monthly-table .task-name) {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    white-space: nowrap;
+    width: 180px;
+    background-color: transparent;
+  }
+
+  :global(.monthly-table td:not(.task-name)) {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    background-clip: content-box;
+  }
+
+  :global(.tracker-td) {
+    vertical-align: middle;
+  }
+
+  :global(.monthly-cell) {
+    margin: 0 auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+  }
+
+  :global(.monthly-table .level-0) { background-color: var(--bg-color); border: 1px solid color-mix(in srgb, var(--border-color) 50%, transparent); }
+  :global(.monthly-table .level-1) { background-color: color-mix(in srgb, var(--text-color) 20%, var(--bg-color)); border: none; }
+  :global(.monthly-table .level-2) { background-color: color-mix(in srgb, var(--text-color) 45%, var(--bg-color)); border: none; }
+  :global(.monthly-table .level-3) { background-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color)); border: none; }
+  :global(.monthly-table .level-4) { background-color: var(--text-color); border: none; }
+
+  :global(.level-not-started) {
+    background-color: var(--bg-color);
+    opacity: 0.1;
+    border: 1px solid transparent;
+  }
+
+  /* Heatmap */
+  .heatmap-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .heatmap-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-serif);
+  }
+
+  .heatmap-container {
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .heatmap-scroll-wrapper {
+    overflow-x: auto;
+    padding-bottom: var(--space-sm);
+    margin-bottom: calc(-1 * var(--space-sm));
+    display: flex;
+    flex-direction: row-reverse; 
+  }
+
+  .heatmap-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+    gap: 4px;
+    margin-bottom: var(--space-lg);
+    min-width: max-content;
+    direction: ltr;
+  }
+
+  .heatmap-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    background-color: var(--bg-color);
+    border: 1px solid color-mix(in srgb, var(--border-color) 50%, transparent);
+  }
+
+  /* Dynamic Heatmap Colors - Theme Adaptive */
+  .level-0 { background-color: var(--bg-color); }
+  .level-1 { background-color: color-mix(in srgb, var(--text-color) 20%, var(--bg-color)); border: none; }
+  .level-2 { background-color: color-mix(in srgb, var(--text-color) 45%, var(--bg-color)); border: none; }
+  .level-3 { background-color: color-mix(in srgb, var(--text-color) 70%, var(--bg-color)); border: none; }
+  .level-4 { background-color: var(--text-color); border: none; }
+
+  .heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-md);
+  }
+
+  .heatmap-legend span {
+    margin: 0 4px;
+  }
+
+  /* Habits Section */
+  .habits-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .habits-column h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-xl);
+    font-family: var(--font-serif);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .habits-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .habit-card {
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+  }
+
+  .habit-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .habit-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+  }
+
+  .check-icon {
+    color: var(--text-color);
+  }
+
+  .build-icon {
+    color: var(--text-secondary);
+  }
+
+  .habit-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .habits-section {
+      grid-template-columns: 1fr;
+    }
+    
+    .scoreboard {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5 {
+    opacity: 0;
+    animation: slideUp var(--transition-slow) forwards;
+  }
+</style>

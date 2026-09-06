@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Ratan Dhanjal</title>
+  <meta name="description" content="Professional projects and cloud infrastructure implementations by Ratan Dhanjal.">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="fade-out">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </span>
+        Ratan<span class="text-gradient">Dhanjal</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"></button>
+      </nav>
+
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="projects.html" class="nav-link active">Projects</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main style="padding-top: 100px;">
+    <section class="section" style="min-height: auto; padding: var(--space-xl) 0;">
+      <div class="container">
+        
+        <div class="reveal">
+          <h1 class="text-gradient" style="margin-bottom: var(--space-xs);">Key Implementations</h1>
+          <p style="font-size: 1.125rem;">Highlighting major architectural and automation projects from my professional career.</p>
+        </div>
+
+        <div class="stagger-container active" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl); margin-top: var(--space-2xl);">
+          
+          <!-- Project 1 -->
+          <div class="card glass stagger-item">
+            <h3 style="margin-bottom: var(--space-sm);">End-to-End CI/CD Automation</h3>
+            <p><strong>Problem:</strong> Manual deployment processes causing slow release cycles and inconsistent environments.</p>
+            <p><strong>Solution:</strong> Leveraged Azure DevOps to build automated build, test, and deployment pipelines. Reduced deployment time significantly and improved release frequency across applications.</p>
+            <div class="tags">
+              <span class="tag">Azure DevOps</span>
+              <span class="tag">CI/CD</span>
+              <span class="tag">Pipelines</span>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="card glass stagger-item">
+            <h3 style="margin-bottom: var(--space-sm);">Infrastructure as Code (IaC) Framework</h3>
+            <p><strong>Problem:</strong> Infrastructure drift and lack of version control for cloud resources.</p>
+            <p><strong>Solution:</strong> Designed and implemented IaC solutions using Terraform. Automated the provisioning and management of Azure cloud resources, ensuring compliance, security, and version control via Git.</p>
+            <div class="tags">
+              <span class="tag">Terraform</span>
+              <span class="tag">Azure</span>
+              <span class="tag">Git</span>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="card glass stagger-item">
+            <h3 style="margin-bottom: var(--space-sm);">Proactive Security Scanning Pipeline</h3>
+            <p><strong>Problem:</strong> Security vulnerabilities being introduced into infrastructure configurations.</p>
+            <p><strong>Solution:</strong> Integrated TFSec and TruffleHog into the CI/CD pipeline for proactive security scanning of Terraform code repositories, catching misconfigurations before deployment.</p>
+            <div class="tags">
+              <span class="tag">TFSec</span>
+              <span class="tag">TruffleHog</span>
+              <span class="tag">Security</span>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="card glass stagger-item">
+            <h3 style="margin-bottom: var(--space-sm);">Scalable Multi-Container Architecture</h3>
+            <p><strong>Problem:</strong> Applications were difficult to scale and manage under varying loads.</p>
+            <p><strong>Solution:</strong> Implemented containerization strategies using Docker and Kubernetes. Utilized YAML and JSON-based configuration files to deploy and manage highly scalable multi-container applications (AKS).</p>
+            <div class="tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Kubernetes</span>
+              <span class="tag">AKS</span>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="card glass stagger-item">
+            <h3 style="margin-bottom: var(--space-sm);">Secure Cloud Network Topology</h3>
+            <p><strong>Problem:</strong> Client required a secure, distributed, and highly available network architecture in Azure.</p>
+            <p><strong>Solution:</strong> Configured Virtual Networks, subnets, and VNet peering. Implemented Site-to-Site and Point-to-Site VPNs. Secured traffic using Network Security Groups (NSG) and Application Gateway.</p>
+            <div class="tags">
+              <span class="tag">Azure Networking</span>
+              <span class="tag">VPN</span>
+              <span class="tag">App Gateway</span>
+            </div>
+          </div>
+
+          <!-- Project 6 -->
+          <div class="card glass stagger-item">
+            <h3 style="margin-bottom: var(--space-sm);">Production Observability Stack</h3>
+            <p><strong>Problem:</strong> Lack of visibility into production incidents, increasing mean time to resolution (MTTR).</p>
+            <p><strong>Solution:</strong> Configured and managed Azure Monitor for production environments. Improved incident detection and response times through deep-dive troubleshooting and analytics.</p>
+            <div class="tags">
+              <span class="tag">Azure Monitor</span>
+              <span class="tag">Observability</span>
+              <span class="tag">Troubleshooting</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top: 0; padding-top: var(--space-xl);">
+        <p>&copy; <span id="year">2026</span> Ratan Dhanjal. All rights reserved. | ratandhanjal.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.onload = () => {
+      document.body.classList.remove('fade-out');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    };
+  </script>
+</body>
+</html>

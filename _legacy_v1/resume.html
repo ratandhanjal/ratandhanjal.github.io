@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume & Education | Ratan Dhanjal</title>
+  <meta name="description" content="Resume, Education, and Certifications of Ratan Dhanjal.">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="fade-out">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </span>
+        Ratan<span class="text-gradient">Dhanjal</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="resume.html" class="nav-link active">Resume</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"></button>
+      </nav>
+
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="resume.html" class="nav-link active">Resume</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main style="padding-top: 100px;">
+    <section class="section" style="min-height: auto; padding: var(--space-xl) 0;">
+      <div class="container">
+        
+        <div class="reveal flex flex-col items-center text-center">
+          <h1 class="text-gradient" style="margin-bottom: var(--space-xs);">Resume & Education</h1>
+          <p style="font-size: 1.125rem; max-width: 600px;">View my educational background or download my complete professional resume.</p>
+          
+          <div style="margin-top: var(--space-lg);">
+            <a href="Ratan_Dhanjal_Resume.pdf" download="Ratan_Dhanjal_Resume.pdf" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Download PDF Resume
+            </a>
+          </div>
+        </div>
+
+        <div class="stagger-container active" style="margin-top: var(--space-3xl);">
+          <h2 class="stagger-item" style="margin-bottom: var(--space-xl); text-align: center;">Education</h2>
+          
+          <div class="timeline" style="margin-top: 0;">
+            
+            <div class="timeline-item stagger-item">
+              <div class="timeline-content card glass">
+                <span class="timeline-date">2015</span>
+                <h3 class="timeline-title">B. Tech in Computer Science Engineering</h3>
+                <p class="timeline-company">Karnataka State Open University</p>
+              </div>
+            </div>
+
+            <div class="timeline-item stagger-item">
+              <div class="timeline-content card glass">
+                <span class="timeline-date">May 2011</span>
+                <h3 class="timeline-title">Diploma in Electrical Engineering</h3>
+                <p class="timeline-company">Dayalbagh University, Agra</p>
+              </div>
+            </div>
+
+            <div class="timeline-item stagger-item">
+              <div class="timeline-content card glass">
+                <span class="timeline-date">May 2008</span>
+                <h3 class="timeline-title">ITI - Wireman Certificate</h3>
+                <p class="timeline-company">Dayalbagh University, Agra</p>
+              </div>
+            </div>
+
+            <div class="timeline-item stagger-item">
+              <div class="timeline-content card glass">
+                <span class="timeline-date">May 2007</span>
+                <h3 class="timeline-title">Higher Secondary</h3>
+                <p class="timeline-company">U.P. Board, Agra</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top: 0; padding-top: var(--space-xl);">
+        <p>&copy; <span id="year">2026</span> Ratan Dhanjal. All rights reserved. | ratandhanjal.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.onload = () => {
+      document.body.classList.remove('fade-out');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    };
+  </script>
+</body>
+</html>
