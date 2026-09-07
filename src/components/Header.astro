@@ -51,8 +51,10 @@ const currentPath = Astro.url.pathname;
     background-color: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
     padding: var(--space-md) 0;
-    backdrop-filter: blur(10px);
-    background-color: color-mix(in srgb, var(--bg-color) 80%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    /* Use 95% opacity to ensure text is readable even if blur fails */
+    background-color: color-mix(in srgb, var(--bg-color) 95%, transparent);
   }
 
   .header-container {
