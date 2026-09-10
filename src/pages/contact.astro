@@ -3,165 +3,760 @@ import Layout from '../layouts/Layout.astro';
 import profileData from '../data/profile.json';
 ---
 
-<Layout title="Contact | Ratan Dhanjal">
+<Layout title="Contact | Ratan Dhanjal" description="Get in touch with Ratan Dhanjal for freelance projects, consulting, or collaboration opportunities.">
   <div class="container page-container fade-in">
-    <div class="contact-card card glass-effect stagger-1">
-      <h1 class="font-serif">Let's talk.</h1>
-      
-      <p class="description">
-        I am currently open to freelance projects, technical consulting, and interesting collaboration opportunities.
-      </p>
 
-      <div class="contact-methods">
-        <a href={`mailto:${profileData.email}`} class="contact-link primary-link">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </span>
-          <span class="text">{profileData.email}</span>
-        </a>
-        
-        <div class="social-links mt-lg">
-          <p class="tag">Also find me on</p>
-          <div class="flex gap-md">
-            <a href={profileData.socials.github} target="_blank" rel="noopener noreferrer" class="social-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-              GitHub
-            </a>
-            <a href={profileData.socials.linkedin} target="_blank" rel="noopener noreferrer" class="social-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-              LinkedIn
-            </a>
-          </div>
+    <div class="contact-grid">
+
+      <!-- Left: Info Panel -->
+      <div class="info-panel stagger-1">
+        <p class="tag">Get in touch</p>
+        <h1 class="font-serif">Let's talk.</h1>
+        <p class="description">
+          Open to freelance projects, technical consulting, and interesting collaboration opportunities.
+          Fill out the form and I'll get back to you as soon as possible.
+        </p>
+
+        <div class="contact-methods">
+          <a href={`mailto:${profileData.email}`} class="contact-link" id="email-link">
+            <span class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </span>
+            <span>{profileData.email}</span>
+          </a>
+
+          <a href={profileData.socials.linkedin} target="_blank" rel="noopener noreferrer" class="contact-link" id="linkedin-link">
+            <span class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </span>
+            <span>LinkedIn</span>
+          </a>
+
+          <a href={profileData.socials.github} target="_blank" rel="noopener noreferrer" class="contact-link" id="github-link">
+            <span class="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            </span>
+            <span>GitHub</span>
+          </a>
+        </div>
+
+        <div class="availability-badge" id="availability-badge">
+          <span class="pulse-dot"></span>
+          Available for new projects
         </div>
       </div>
+
+      <!-- Right: Form Panel -->
+      <div class="form-panel stagger-2">
+        <!-- Success State -->
+        <div id="success-message" class="feedback-banner success-banner" role="alert" aria-live="polite" style="display:none;">
+          <span class="feedback-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+          </span>
+          <div>
+            <strong>Message sent successfully!</strong>
+            <p>Thank you! I'll get back to you as soon as possible.</p>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-message" class="feedback-banner error-banner" role="alert" aria-live="polite" style="display:none;">
+          <span class="feedback-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          </span>
+          <div>
+            <strong>Failed to send message.</strong>
+            <p>Something went wrong. Please try again or email me directly.</p>
+          </div>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <!-- Honeypot anti-spam field (hidden from real users) -->
+          <input type="text" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                autocomplete="name"
+                required
+                aria-required="true"
+              />
+              <span class="field-error" id="name-error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Contact Number <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+1 123 456 7890"
+                autocomplete="tel"
+                required
+                aria-required="true"
+              />
+              <span class="field-error" id="phone-error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="john@example.com"
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+              <span class="field-error" id="email-error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country <span class="required" aria-hidden="true">*</span></label>
+              <div class="select-wrapper">
+                <select id="country" name="country" required aria-required="true">
+                  <option value="" disabled selected>Select your country</option>
+                  <option value="Afghanistan">Afghanistan</option>
+                  <option value="Albania">Albania</option>
+                  <option value="Algeria">Algeria</option>
+                  <option value="Argentina">Argentina</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Austria">Austria</option>
+                  <option value="Bangladesh">Bangladesh</option>
+                  <option value="Belgium">Belgium</option>
+                  <option value="Brazil">Brazil</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Chile">Chile</option>
+                  <option value="China">China</option>
+                  <option value="Colombia">Colombia</option>
+                  <option value="Czech Republic">Czech Republic</option>
+                  <option value="Denmark">Denmark</option>
+                  <option value="Egypt">Egypt</option>
+                  <option value="Finland">Finland</option>
+                  <option value="France">France</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Greece">Greece</option>
+                  <option value="Hong Kong">Hong Kong</option>
+                  <option value="Hungary">Hungary</option>
+                  <option value="India">India</option>
+                  <option value="Indonesia">Indonesia</option>
+                  <option value="Iran">Iran</option>
+                  <option value="Iraq">Iraq</option>
+                  <option value="Ireland">Ireland</option>
+                  <option value="Israel">Israel</option>
+                  <option value="Italy">Italy</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Jordan">Jordan</option>
+                  <option value="Kenya">Kenya</option>
+                  <option value="Kuwait">Kuwait</option>
+                  <option value="Malaysia">Malaysia</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Morocco">Morocco</option>
+                  <option value="Netherlands">Netherlands</option>
+                  <option value="New Zealand">New Zealand</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="Philippines">Philippines</option>
+                  <option value="Poland">Poland</option>
+                  <option value="Portugal">Portugal</option>
+                  <option value="Qatar">Qatar</option>
+                  <option value="Romania">Romania</option>
+                  <option value="Russia">Russia</option>
+                  <option value="Saudi Arabia">Saudi Arabia</option>
+                  <option value="Singapore">Singapore</option>
+                  <option value="South Africa">South Africa</option>
+                  <option value="South Korea">South Korea</option>
+                  <option value="Spain">Spain</option>
+                  <option value="Sri Lanka">Sri Lanka</option>
+                  <option value="Sweden">Sweden</option>
+                  <option value="Switzerland">Switzerland</option>
+                  <option value="Taiwan">Taiwan</option>
+                  <option value="Thailand">Thailand</option>
+                  <option value="Turkey">Turkey</option>
+                  <option value="Ukraine">Ukraine</option>
+                  <option value="United Arab Emirates">United Arab Emirates</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="United States">United States</option>
+                  <option value="Vietnam">Vietnam</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </div>
+              <span class="field-error" id="country-error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Tell me about your project or how I can help..."
+              required
+              aria-required="true"
+            ></textarea>
+            <span class="field-error" id="message-error" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
+            <span id="btn-text">Send Message</span>
+            <span id="btn-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </span>
+            <span id="btn-spinner" class="spinner" style="display:none;" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+
     </div>
   </div>
 </Layout>
 
+<script>
+  const WEB3FORMS_KEY = 'ffb5431d-29c2-4493-936d-3b5f6f62fb79';
+
+  // Rate limiting: track submission timestamps in sessionStorage
+  const RATE_LIMIT_MS = 60_000; // 1 minute between submissions
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text') as HTMLSpanElement;
+  const btnIcon = document.getElementById('btn-icon') as HTMLSpanElement;
+  const btnSpinner = document.getElementById('btn-spinner') as HTMLSpanElement;
+  const successBanner = document.getElementById('success-message') as HTMLDivElement;
+  const errorBanner = document.getElementById('error-message') as HTMLDivElement;
+
+  // ── Validation helpers ──────────────────────────────────────────────────────
+  function isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  }
+
+  function isValidPhone(phone: string): boolean {
+    // Allow +, spaces, dashes, parentheses; min 7 digits
+    const digits = phone.replace(/\D/g, '');
+    return /^[+\d\s\-().]+$/.test(phone.trim()) && digits.length >= 7 && digits.length <= 15;
+  }
+
+  function showError(fieldId: string, message: string) {
+    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    const errorEl = document.getElementById(`${fieldId}-error`) as HTMLSpanElement;
+    field?.classList.add('invalid');
+    if (errorEl) errorEl.textContent = message;
+  }
+
+  function clearError(fieldId: string) {
+    const field = document.getElementById(fieldId) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    const errorEl = document.getElementById(`${fieldId}-error`) as HTMLSpanElement;
+    field?.classList.remove('invalid');
+    if (errorEl) errorEl.textContent = '';
+  }
+
+  function validateForm(): boolean {
+    let valid = true;
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const country = (document.getElementById('country') as HTMLSelectElement).value;
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+    clearError('name'); clearError('phone'); clearError('email'); clearError('country'); clearError('message');
+
+    if (!name) { showError('name', 'Full name is required.'); valid = false; }
+    else if (name.length < 2) { showError('name', 'Name must be at least 2 characters.'); valid = false; }
+
+    if (!phone) { showError('phone', 'Contact number is required.'); valid = false; }
+    else if (!isValidPhone(phone)) { showError('phone', 'Please enter a valid phone number.'); valid = false; }
+
+    if (!email) { showError('email', 'Email address is required.'); valid = false; }
+    else if (!isValidEmail(email)) { showError('email', 'Please enter a valid email address.'); valid = false; }
+
+    if (!country) { showError('country', 'Please select your country.'); valid = false; }
+
+    if (!message) { showError('message', 'Message is required.'); valid = false; }
+    else if (message.length < 10) { showError('message', 'Message must be at least 10 characters.'); valid = false; }
+
+    return valid;
+  }
+
+  // ── Inline validation on blur ───────────────────────────────────────────────
+  ['name', 'phone', 'email', 'country', 'message'].forEach((id) => {
+    const el = document.getElementById(id);
+    el?.addEventListener('blur', () => validateForm());
+    el?.addEventListener('input', () => {
+      const errorEl = document.getElementById(`${id}-error`);
+      if (errorEl?.textContent) validateForm();
+    });
+  });
+
+  // ── Form submission ─────────────────────────────────────────────────────────
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Honeypot check
+    const honeypot = form.querySelector('[name="botcheck"]') as HTMLInputElement;
+    if (honeypot?.value) return; // Bot detected, silently reject
+
+    if (!validateForm()) return;
+
+    // Rate limiting
+    const lastSubmit = sessionStorage.getItem('lastContactSubmit');
+    if (lastSubmit && Date.now() - parseInt(lastSubmit) < RATE_LIMIT_MS) {
+      errorBanner.style.display = 'flex';
+      errorBanner.querySelector('p')!.textContent = 'Please wait a moment before submitting again.';
+      return;
+    }
+
+    // Set loading state
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending…';
+    btnIcon.style.display = 'none';
+    btnSpinner.style.display = 'inline-block';
+    successBanner.style.display = 'none';
+    errorBanner.style.display = 'none';
+
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const country = (document.getElementById('country') as HTMLSelectElement).value;
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+    const payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: `New Contact Form Submission – ${name}`,
+      from_name: name,
+      replyto: email,
+      // Custom formatted body for the email
+      message: `Name: ${name}\nContact Number: ${phone}\nEmail: ${email}\nCountry: ${country}\n\nMessage:\n${message}`,
+      // Also send individual fields for Web3Forms formatting
+      Name: name,
+      'Contact Number': phone,
+      Email: email,
+      Country: country,
+      Message: message,
+    };
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        sessionStorage.setItem('lastContactSubmit', Date.now().toString());
+        successBanner.style.display = 'flex';
+        successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        form.reset();
+        // Clear any remaining validation states
+        ['name', 'phone', 'email', 'country', 'message'].forEach(clearError);
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch {
+      errorBanner.style.display = 'flex';
+      errorBanner.querySelector('p')!.textContent = 'Something went wrong. Please try again or email me directly.';
+      errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } finally {
+      submitBtn.disabled = false;
+      btnText.textContent = 'Send Message';
+      btnIcon.style.display = 'inline-flex';
+      btnSpinner.style.display = 'none';
+    }
+  });
+</script>
+
 <style>
   .page-container {
-    padding-top: var(--space-4xl);
+    padding-top: var(--space-3xl);
     padding-bottom: var(--space-4xl);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: calc(100vh - 200px);
   }
 
-  .contact-card {
-    max-width: 600px;
-    width: 100%;
-    padding: var(--space-3xl);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    background-color: var(--bg-color-secondary);
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  /* ── Grid Layout ─────────────────────────────────────────────── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--space-3xl);
+    align-items: start;
   }
 
-  :global([data-theme='dark']) .contact-card {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  /* ── Info Panel ──────────────────────────────────────────────── */
+  .info-panel {
+    position: sticky;
+    top: var(--space-2xl);
+    padding-top: var(--space-xl);
+  }
+
+  .info-panel .tag {
+    display: block;
+    margin-bottom: var(--space-sm);
   }
 
   .font-serif {
     font-family: var(--font-serif);
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: var(--space-md);
-    margin-top: 0;
+    margin-top: var(--space-xs);
+    line-height: 1.1;
   }
 
   .description {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: var(--text-secondary);
+    line-height: 1.7;
     margin-bottom: var(--space-2xl);
-    line-height: 1.6;
   }
 
   .contact-methods {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-xl);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
   }
 
-  .primary-link {
+  .contact-link {
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    font-size: 1.5rem;
-    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+  }
+
+  .contact-link:hover {
     color: var(--text-color);
-    padding: var(--space-md) var(--space-xl);
+    background-color: var(--bg-color-secondary);
+    border-color: var(--border-color);
+  }
+
+  .contact-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background-color: var(--bg-color-secondary);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-full);
+    border-radius: var(--radius-md);
+    justify-content: center;
     transition: all var(--transition-fast);
   }
 
-  .primary-link:hover {
-    border-color: var(--text-color);
-    background-color: var(--text-color);
+  .contact-link:hover .contact-icon {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
     color: var(--bg-color);
   }
 
-  .primary-link:hover .icon {
-    transform: scale(1.1);
-  }
-
-  .icon {
-    display: flex;
-    transition: transform var(--transition-fast);
-  }
-
-  .social-links {
-    margin-top: var(--space-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .tag {
-    margin-bottom: var(--space-sm);
-  }
-
-  .social-btn {
-    display: flex;
+  .availability-badge {
+    display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-lg);
+    padding: var(--space-xs) var(--space-md);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-full);
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
-    transition: all var(--transition-fast);
+    background-color: var(--bg-color-secondary);
   }
 
-  .social-btn:hover {
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    animation: pulse-ring 2s infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    70%  { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+
+  /* ── Form Panel ──────────────────────────────────────────────── */
+  .form-panel {
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+  }
+
+  /* ── Feedback Banners ────────────────────────────────────────── */
+  .feedback-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .feedback-banner p {
+    margin: 0;
+    margin-top: 2px;
+    color: inherit;
+    opacity: 0.85;
+  }
+
+  .feedback-banner strong {
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .feedback-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .success-banner {
+    background-color: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #16a34a;
+  }
+
+  .error-banner {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+  }
+
+  :global([data-theme='dark']) .success-banner {
+    background-color: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+  }
+
+  :global([data-theme='dark']) .error-banner {
+    background-color: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+  }
+
+  /* ── Form Layout ─────────────────────────────────────────────── */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 500;
     color: var(--text-color);
-    border-color: var(--border-color-hover);
-    background-color: var(--bg-color);
+    letter-spacing: 0.01em;
   }
 
+  .required {
+    color: #ef4444;
+    margin-left: 2px;
+  }
+
+  /* ── Inputs ──────────────────────────────────────────────────── */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.65rem var(--space-md);
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+  }
+
+  :global([data-theme='dark']) input:focus,
+  :global([data-theme='dark']) select:focus,
+  :global([data-theme='dark']) textarea:focus {
+    box-shadow: 0 0 0 3px rgba(237, 237, 237, 0.08);
+  }
+
+  input.invalid,
+  select.invalid,
+  textarea.invalid {
+    border-color: #ef4444;
+  }
+
+  input.invalid:focus,
+  select.invalid:focus,
+  textarea.invalid:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* ── Select ──────────────────────────────────────────────────── */
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper select {
+    cursor: pointer;
+    padding-right: 2.5rem;
+  }
+
+  .select-arrow {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── Field Errors ────────────────────────────────────────────── */
+  .field-error {
+    font-size: 0.78rem;
+    color: #ef4444;
+    min-height: 1em;
+    line-height: 1.4;
+  }
+
+  /* ── Submit Button ───────────────────────────────────────────── */
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 0.75rem var(--space-2xl);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    align-self: flex-start;
+    margin-top: var(--space-xs);
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ── Spinner ─────────────────────────────────────────────────── */
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── Stagger Animations ──────────────────────────────────────── */
   .stagger-1 {
     opacity: 0;
-    animation: slideUp var(--transition-slow) forwards;
+    animation: slideUp var(--transition-slow) 100ms forwards;
   }
-  
-  @media (max-width: 600px) {
-    .contact-card {
+
+  .stagger-2 {
+    opacity: 0;
+    animation: slideUp var(--transition-slow) 200ms forwards;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Responsive ──────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .info-panel {
+      position: static;
+      padding-top: 0;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .form-panel {
       padding: var(--space-xl);
     }
-    
+  }
+
+  @media (max-width: 480px) {
     .font-serif {
       font-size: 2.5rem;
     }
-    
-    .primary-link {
-      font-size: 1.25rem;
-      padding: var(--space-sm) var(--space-lg);
-    }
-    
-    .social-links .flex {
-      flex-direction: column;
+
+    .submit-btn {
+      width: 100%;
     }
   }
 </style>
