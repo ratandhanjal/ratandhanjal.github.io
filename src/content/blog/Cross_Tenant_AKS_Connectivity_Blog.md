@@ -5,7 +5,7 @@ category: "Technology"
 subCategory: "Azure"
 tags: ["Azure", "AKS", "Private Link", "Private Endpoint"]
 readingTime: "5 min"
-coverImage: "/blog_images/Private_Link_Service.png"
+coverImage: "/blog_images/Private_Link_Service.webp"
 ---
 
 
@@ -46,7 +46,7 @@ Architecting for security doesn't mean sacrificing interoperability. With Azure 
 
 Here is a diagram of the Architecture:
 
-![Private Endpoint Architecture Diagram](/blog_images/Private_Link_Service.png)
+![Private Endpoint Architecture Diagram](/blog_images/Private_Link_Service.webp)
 
 
 Here are the three distinct Low-Level Design (LLD) diagrams detailing each critical component of the cross-tenant AKS connectivity solution.
@@ -62,4 +62,5 @@ LLD 3: Deep-dive connection sequence and NATing logic – The final diagram prov
 
 
 
-![Low-Level Design (LLD)](/blog_images/LLD_private_link_service.png)
+![Low-Level Design (LLD)](/blog_images/LLD_private_link_service.webp)
+
