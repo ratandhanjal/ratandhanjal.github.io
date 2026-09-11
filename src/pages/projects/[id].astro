@@ -1,0 +1,299 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const statusColors: Record<string, string> = {
+  'Active': 'status-active',
+  'In Progress': 'status-in-progress',
+  'Completed': 'status-completed',
+};
+---
+
+<Layout title={`${project.data.name} | Ratan Dhanjal`}>
+  <div class="container article-container fade-in">
+    <header class="article-header stagger-1">
+      <div class="top-nav">
+        <a href="/projects" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          Back to projects
+        </a>
+      </div>
+      
+      <div class="header-content">
+        <div class="header-text">
+          <div class="article-meta">
+            <span class="tag">
+              {project.data.techStack.join(' · ')}
+            </span>
+            {project.data.status && (
+              <span class={`status-badge ${statusColors[project.data.status] || ''}`}>
+                {project.data.status}
+              </span>
+            )}
+          </div>
+          <h1 class="font-serif">{project.data.name}</h1>
+          <p class="project-description">{project.data.description}</p>
+          
+          <div class="project-links">
+            {project.data.github && (
+              <a href={project.data.github} target="_blank" rel="noopener noreferrer" class="btn btn-primary project-action-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                View Repository
+              </a>
+            )}
+            {project.data.link && (
+              <a href={project.data.link} target="_blank" rel="noopener noreferrer" class="btn project-action-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                Live Demo
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="project-details stagger-2">
+      {project.data.problem && (
+        <section class="detail-section">
+          <h2>The Problem</h2>
+          <p>{project.data.problem}</p>
+        </section>
+      )}
+
+      {project.data.solution && (
+        <section class="detail-section">
+          <h2>The Solution</h2>
+          <p>{project.data.solution}</p>
+        </section>
+      )}
+
+      {project.data.myContribution && (
+        <section class="detail-section">
+          <h2>My Contribution</h2>
+          <p>{project.data.myContribution}</p>
+        </section>
+      )}
+    </div>
+
+    <article class="article-content stagger-2">
+      <Content />
+    </article>
+    
+    <div class="article-footer stagger-3">
+      <a href="/projects" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Back to projects
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .article-container {
+    max-width: 720px;
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-4xl);
+  }
+
+  .article-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    flex-wrap: wrap;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+  }
+
+  .project-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+  }
+
+  .top-nav {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .project-links {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .project-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Status Badge */
+  .status-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid;
+  }
+
+  .status-active {
+    color: #16a34a;
+    border-color: rgba(34, 197, 94, 0.3);
+    background: rgba(34, 197, 94, 0.08);
+  }
+
+  .status-completed {
+    color: var(--text-tertiary);
+    border-color: var(--border-color);
+    background: transparent;
+  }
+
+  .status-in-progress {
+    color: #ca8a04;
+    border-color: rgba(234, 179, 8, 0.3);
+    background: rgba(234, 179, 8, 0.08);
+  }
+
+  :global([data-theme='dark']) .status-active {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.25);
+  }
+
+  :global([data-theme='dark']) .status-in-progress {
+    color: #fde047;
+    border-color: rgba(253, 224, 71, 0.25);
+  }
+
+  /* Details Section */
+  .project-details {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-xl);
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+  }
+
+  .detail-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .detail-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .detail-section h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .detail-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Markdown Content Styling */
+  .article-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-color);
+  }
+
+  .article-content :global(h2) {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .article-content :global(h3) {
+    font-size: 1.25rem;
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .article-content :global(p) {
+    margin-bottom: var(--space-lg);
+    color: var(--text-secondary);
+  }
+  
+  .article-content :global(a) {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-color: var(--border-color-hover);
+    text-underline-offset: 4px;
+  }
+  
+  .article-content :global(a:hover) {
+    text-decoration-color: var(--text-color);
+  }
+
+  .article-content :global(ul), .article-content :global(ol) {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-xl);
+    color: var(--text-secondary);
+  }
+
+  .article-content :global(li) {
+    margin-bottom: var(--space-sm);
+  }
+
+  .article-footer {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .back-link:hover {
+    color: var(--text-color);
+  }
+
+  .stagger-1, .stagger-2, .stagger-3 {
+    opacity: 0;
+    animation: slideUp var(--transition-slow) forwards;
+  }
+</style>
