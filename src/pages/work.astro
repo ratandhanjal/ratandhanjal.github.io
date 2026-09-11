@@ -2,11 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Work & Experience | Ratan Dhanjal">
+<Layout title="Work & Experience | Ratan Dhanjal" description="Career timeline and professional experience of Ratan Dhanjal — DevOps Lead, Cloud Engineer, and Platform Engineering specialist.">
   <div class="container page-container fade-in">
     <header class="page-header stagger-1">
-      <h1 class="font-serif">Work</h1>
-      <p class="subtitle">My professional journey in cloud and infrastructure.</p>
+      <div class="header-top">
+        <div>
+          <h1 class="font-serif">Work</h1>
+          <p class="subtitle">My professional journey in cloud and infrastructure.</p>
+        </div>
+        <a
+          href="/Resume/Ratan_Dhajal_Resume.pdf"
+          download="Ratan_Dhanjal_Resume.pdf"
+          class="btn resume-btn"
+          id="download-resume-btn"
+          aria-label="Download Ratan Dhanjal's Resume PDF"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          Download Resume
+        </a>
+      </div>
     </header>
 
     <div class="timeline stagger-2">
@@ -155,6 +169,36 @@ import Layout from '../layouts/Layout.astro';
 
   .page-header {
     margin-bottom: var(--space-3xl);
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-lg);
+  }
+
+  .resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-bottom: 4px; /* optically align with subtitle baseline */
+  }
+
+  .resume-btn:hover {
+    border-color: var(--text-color);
+    background: var(--text-color);
+    color: var(--bg-color);
+  }
+
+  @media (max-width: 520px) {
+    .header-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   .font-serif {

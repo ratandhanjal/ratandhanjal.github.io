@@ -1,15 +1,15 @@
 {
   "name": "Ratan Dhanjal",
-  "bio": "Cloud & DevOps Engineer. Building robust, scalable, and secure cloud solutions.",
-  "role": "DevOps Lead",
+  "bio": "I design, automate, and operate secure, scalable, and resilient cloud and infrastructure platforms, with 15+ years of experience spanning IT, infrastructure, networking, cloud, and DevOps. I specialize in transforming complex infrastructure and delivery challenges into reliable, automated, and scalable solutions, with a strong focus on platform engineering, infrastructure automation, continuous delivery, Kubernetes, DevSecOps, observability, and engineering excellence.",
+  "role": "DevOps Lead · Cloud Engineer · Automation Enthusiast",
   "email": "contact@ratandhanjal.com",
   "socials": {
     "github": "https://github.com/ratandhanjal",
     "linkedin": "https://linkedin.com/in/ratandhanjal"
   },
   "seo": {
-    "title": "Ratan Dhanjal | Cloud & DevOps Engineer",
-    "description": "Portfolio of Ratan Dhanjal, a seasoned Cloud and DevOps Engineer with expertise in Azure, Terraform, CI/CD, and Kubernetes.",
+    "title": "Ratan Dhanjal | DevOps & Cloud Engineer | Platform & Infrastructure Engineering",
+    "description": "Portfolio of Ratan Dhanjal — DevOps Lead and Cloud Engineer with 7+ years building secure, scalable cloud infrastructure on Azure using Terraform, Kubernetes, CI/CD, GitOps, and DevSecOps.",
     "url": "https://ratandhanjal.com"
   }
 }

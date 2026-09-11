@@ -2,43 +2,125 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About | Ratan Dhanjal">
+<Layout
+  title="About | Ratan Dhanjal — DevOps & Cloud Engineer"
+  description="About Ratan Dhanjal — DevOps Lead and Cloud Engineer with 7+ years of experience in cloud infrastructure, Kubernetes, Terraform, CI/CD, DevSecOps, and platform engineering."
+>
   <div class="container page-container fade-in">
     <header class="page-header stagger-1">
       <h1 class="font-serif">About Me</h1>
-      <p class="subtitle">Who I am and what drives me.</p>
+      <p class="subtitle">Engineering reliable infrastructure. Automating everything possible.</p>
     </header>
 
     <div class="content-grid">
+      <!-- Main Content -->
       <div class="main-content stagger-2">
-        <h2>Professional Journey</h2>
+
+        <h2>Professional Profile</h2>
         <p>
-          I'm Ratan Dhanjal, a Cloud and DevOps Engineer with over 7 years of experience in the tech industry. My journey began in networking and IT support, eventually leading me to specialize in cloud infrastructure and automation. I've spent significant time architecting solutions on Azure, focusing on Infrastructure as Code (IaC) with Terraform and container orchestration with Kubernetes.
+          I'm a DevOps Lead and Cloud Engineer with over 7 years of hands-on experience designing, automating, and operating
+          cloud infrastructure and platform engineering solutions. My career began in networking and IT infrastructure,
+          giving me deep foundational knowledge of how systems connect, communicate, and fail — knowledge that directly
+          informs how I design resilient cloud architectures today.
         </p>
         <p>
-          Throughout my career at companies like Sopra Steria, Reliance PPM, and Valu Connex, I've developed a passion for building reliable, scalable systems that solve real business problems. I believe in automation, continuous learning, and writing clean, maintainable code.
-        </p>
-        
-        <h2>Philosophy</h2>
-        <p>
-          Technology is a tool to empower people. I approach engineering with a product mindset—focusing not just on how something is built, but why it's built and who it serves. My design philosophy heavily influences my technical work: I prefer minimal, elegant solutions over complex workarounds.
+          Over the years, I've progressed from infrastructure management to cloud engineering, and now lead DevOps and
+          platform engineering initiatives for enterprise-scale programs. I specialise in Azure cloud infrastructure,
+          Infrastructure as Code with Terraform, container orchestration on Kubernetes (AKS), CI/CD pipeline engineering,
+          GitOps-based delivery, and DevSecOps practices.
         </p>
 
-        <h2>Beyond the Screen</h2>
+        <h2>Technical Domains</h2>
         <p>
-          When I'm not writing code or configuring infrastructure, you can find me exploring new technologies, reading books, or traveling. This website serves as my digital journal to document these experiences and the lessons I learn along the way.
+          My core expertise spans several interconnected disciplines. In <strong>cloud infrastructure</strong>, I architect
+          and operate Azure environments, managing everything from virtual networking, load balancers, and private
+          connectivity to AKS cluster lifecycle management and container registry operations.
         </p>
+        <p>
+          In <strong>Infrastructure as Code</strong>, I use Terraform to create consistent, version-controlled, and
+          repeatable provisioning workflows. I implement security scanning at the IaC layer using TFSec and TruffleHog
+          to catch misconfigurations and secrets before they reach production.
+        </p>
+        <p>
+          For <strong>CI/CD and GitOps</strong>, I build and optimise end-to-end pipelines using Azure DevOps, GitHub
+          Actions, and GitLab CI — integrated with ArgoCD for declarative, Git-driven deployments to Kubernetes. I've
+          led Blue-Green deployment strategies and rollback automation for production AKS workloads.
+        </p>
+        <p>
+          In <strong>observability</strong>, I implement monitoring stacks using Prometheus and Grafana, set up
+          structured alerting, and integrate Azure Monitor to provide engineering teams with actionable insight into
+          system health and performance.
+        </p>
+
+        <h2>Engineering Approach</h2>
+        <p>
+          I believe that the best infrastructure is infrastructure that engineers forget about — because it simply works.
+          My approach is built on a few core principles: <strong>automate everything repetitive</strong>,
+          <strong>treat infrastructure as code</strong>, <strong>make security a pipeline concern not an afterthought</strong>,
+          and <strong>design for observability from day one</strong>.
+        </p>
+        <p>
+          I prefer solutions that are maintainable by a team rather than impressive only to their author. Clean,
+          well-documented, version-controlled infrastructure is the foundation of operational reliability — and that
+          is where I focus my engineering energy.
+        </p>
+
+        <h2>Background</h2>
+        <p>
+          Before specialising in cloud and DevOps, I spent years in networking, IT infrastructure, and field engineering.
+          That breadth of experience — from hardware and physical networks to enterprise cloud platforms — gives me a
+          pragmatic, systems-thinking perspective that I bring to every architecture decision.
+        </p>
+
       </div>
 
+      <!-- Sidebar -->
       <aside class="sidebar stagger-3">
         <div class="card glass-effect">
           <h3>Quick Facts</h3>
           <ul class="fact-list">
-            <li><strong>Location:</strong> India</li>
-            <li><strong>Experience:</strong> 7+ Years</li>
-            <li><strong>Focus:</strong> Azure, Terraform, DevOps</li>
-            <li><strong>Interests:</strong> Tech, Reading, Travel</li>
+            <li><strong>Experience</strong> 7+ years in DevOps & Cloud Engineering</li>
+            <li><strong>Background</strong> Networking → IT → Cloud → DevOps</li>
+            <li><strong>Primary Cloud</strong> Microsoft Azure</li>
+            <li><strong>IaC</strong> Terraform</li>
+            <li><strong>Container Platform</strong> Kubernetes / AKS</li>
+            <li><strong>CI/CD</strong> Azure DevOps, GitHub Actions, GitLab</li>
+            <li><strong>GitOps</strong> ArgoCD</li>
+            <li><strong>Security</strong> SonarQube, TFSec, TruffleHog</li>
+            <li><strong>Observability</strong> Prometheus, Grafana, Azure Monitor</li>
+            <li><strong>Scripting</strong> Python, PowerShell, Bash, Azure CLI</li>
+            <li><strong>Location</strong> India</li>
           </ul>
+        </div>
+
+        <div class="card glass-effect links-card">
+          <h3>Explore More</h3>
+          <nav class="sidebar-links" aria-label="Related pages">
+            <a href="/work" class="sidebar-link" id="sidebar-work-link">
+              <span class="sidebar-link-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </span>
+              Work Experience
+            </a>
+            <a href="/projects" class="sidebar-link" id="sidebar-projects-link">
+              <span class="sidebar-link-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+              </span>
+              Open Source Projects
+            </a>
+            <a href="/blog" class="sidebar-link" id="sidebar-blog-link">
+              <span class="sidebar-link-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+              </span>
+              Technical Writing
+            </a>
+            <a href="/contact" class="sidebar-link" id="sidebar-contact-link">
+              <span class="sidebar-link-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              Get in Touch
+            </a>
+          </nav>
         </div>
       </aside>
     </div>
@@ -73,6 +155,7 @@ import Layout from '../layouts/Layout.astro';
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--space-3xl);
+    align-items: start;
   }
 
   .main-content h2 {
@@ -81,7 +164,7 @@ import Layout from '../layouts/Layout.astro';
     margin-bottom: var(--space-md);
     font-size: 1.75rem;
   }
-  
+
   .main-content h2:first-child {
     margin-top: 0;
   }
@@ -93,6 +176,18 @@ import Layout from '../layouts/Layout.astro';
     margin-bottom: var(--space-lg);
   }
 
+  .main-content strong {
+    color: var(--text-color);
+    font-weight: 600;
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────────────────────── */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
   .sidebar .card {
     background-color: var(--bg-color-secondary);
     border: 1px solid var(--border-color);
@@ -102,12 +197,18 @@ import Layout from '../layouts/Layout.astro';
     top: 100px;
   }
 
+  .links-card {
+    position: static !important;
+  }
+
   .sidebar h3 {
     margin-top: 0;
     margin-bottom: var(--space-lg);
     font-family: var(--font-serif);
+    font-size: 1.25rem;
   }
 
+  /* ── Quick Facts ─────────────────────────────────────────────────────── */
   .fact-list {
     list-style: none;
     padding: 0;
@@ -118,7 +219,11 @@ import Layout from '../layouts/Layout.astro';
     padding: var(--space-sm) 0;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .fact-list li:last-child {
@@ -127,17 +232,61 @@ import Layout from '../layouts/Layout.astro';
 
   .fact-list strong {
     color: var(--text-color);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
   }
 
+  /* ── Sidebar Links ───────────────────────────────────────────────────── */
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+  }
+
+  .sidebar-link:hover {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border-color: var(--border-color);
+  }
+
+  .sidebar-link-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Stagger ────────────────────────────────────────────────────────── */
   .stagger-1, .stagger-2, .stagger-3 {
     opacity: 0;
     animation: slideUp var(--transition-slow) forwards;
   }
+  .stagger-1 { animation-delay: 100ms; }
+  .stagger-2 { animation-delay: 200ms; }
+  .stagger-3 { animation-delay: 300ms; }
 
+  /* ── Responsive ──────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
     .content-grid {
       grid-template-columns: 1fr;
+    }
+    .sidebar .card {
+      position: static;
     }
   }
 </style>

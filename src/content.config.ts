@@ -79,6 +79,11 @@ const projectsCollection = defineCollection({
     link: z.string().url().optional(),
     github: z.string().url().optional(),
     date: z.date(),
+    problem: z.string().optional(),
+    solution: z.string().optional(),
+    myContribution: z.string().optional(),
+    status: z.enum(['Active', 'Completed', 'In Progress']).optional(),
+    featured: z.boolean().default(false),
   }),
 });
 

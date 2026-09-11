@@ -18,9 +18,18 @@ const { title, description = "Ratan Dhanjal - Cloud & DevOps Engineer" } = Astro
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Ratan Dhanjal" />
+    <meta name="keywords" content="DevOps Engineer, Cloud Engineer, Platform Engineering, Infrastructure as Code, Terraform, Kubernetes, AKS, Azure, CI/CD, GitOps, ArgoCD, DevSecOps, Automation, Observability, Cloud Infrastructure, Ratan Dhanjal" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ratandhanjal.github.io" />
+    <meta property="og:site_name" content="Ratan Dhanjal" />
     
     <!-- Theme Script -->
     <script is:inline>
