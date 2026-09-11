@@ -12,7 +12,9 @@ const expertiseAreas = [
   { title: 'Observability & Reliability', icon: '📊', desc: 'Proactive monitoring, alerting, and incident response with Prometheus, Grafana, and Azure Monitor.' },
   { title: 'Automation & Scripting', icon: '⚡', desc: 'Reducing manual effort through Python, PowerShell, and Bash automation workflows.' },
   { title: 'Platform Engineering', icon: '🏗️', desc: 'Building developer platforms and self-service infrastructure tooling for engineering teams.' },
-  { title: 'Network Engineering', icon: '🌐', desc: '15+ years of foundations in networking — VPNs, load balancers, NSGs, and private connectivity.' },
+  { title: 'Network Engineering', icon: '🌐', desc: '12+ years of foundations in networking — VPNs, load balancers, NSGs, and private connectivity.' },
+  { title: 'Disaster Recovery & HA', icon: '🛡️', desc: 'AKS backup strategies, Blue-Green deployments, and VM patch management for production resilience.' },
+  { title: 'Cloud Cost & FinOps', icon: '💡', desc: 'Right-sizing resources, identifying waste, and implementing governance to optimise cloud spend.' },
 ];
 
 const techGroups = [
@@ -42,8 +44,7 @@ const techGroups = [
         <img src="/images/Ratan_Dhanjal.webp" alt={profileData.name} class="zoomed-image" />
       </div>
 
-      <p class="tag stagger-1">Cloud · DevOps · Platform Engineering</p>
-      <h1 class="stagger-2 font-serif title">I'm {profileData.name}</h1>
+      <h1 class="stagger-1 font-serif title">I'm {profileData.name}</h1>
       <h2 class="stagger-3 subtitle">{profileData.role}</h2>
 
       <p class="stagger-4 bio">
@@ -172,6 +173,13 @@ const techGroups = [
     padding: var(--space-3xl) 0;
   }
 
+  @media (max-width: 640px) {
+    .hero-section {
+      min-height: unset;
+      padding: var(--space-xl) 0;
+    }
+  }
+
   .profile-image-container {
     width: 160px;
     height: 160px;
@@ -287,46 +295,46 @@ const techGroups = [
   /* ── Expertise Grid ────────────────────────────────────────────────────── */
   .expertise-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: var(--space-md);
   }
 
   .expertise-card {
     background-color: var(--bg-color-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: var(--space-xl);
+    padding: var(--space-lg);
     transition: border-color var(--transition-fast), transform var(--transition-normal), box-shadow var(--transition-normal);
   }
 
   .expertise-card:hover {
     border-color: var(--border-color-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   }
 
   :global([data-theme='dark']) .expertise-card:hover {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
   }
 
   .expertise-icon {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
     display: block;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     line-height: 1;
   }
 
   .expertise-title {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    margin: 0 0 var(--space-sm) 0;
+    margin: 0 0 4px 0;
     color: var(--text-color);
   }
 
   .expertise-desc {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.55;
     margin: 0;
   }
 
@@ -412,17 +420,49 @@ const techGroups = [
 
   /* ── Responsive ────────────────────────────────────────────────────────── */
   @media (max-width: 640px) {
-    .expertise-grid {
-      grid-template-columns: 1fr 1fr;
+    .section-container {
+      padding: var(--space-xl) 0;
     }
 
-    .stack-group {
-      flex-direction: column;
+    .section-header {
+      margin-bottom: var(--space-xl);
+    }
+
+    .expertise-grid {
+      grid-template-columns: 1fr 1fr;
       gap: var(--space-sm);
     }
 
+    /* Tech stack: horizontal scroll on mobile instead of stacking vertically */
+    .stack-groups {
+      gap: var(--space-md);
+    }
+
+    .stack-group {
+      flex-direction: row;
+      align-items: baseline;
+      gap: var(--space-md);
+    }
+
     .stack-label {
-      width: auto;
+      width: 72px;
+      font-size: 0.7rem;
+    }
+
+    .stack-tags {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+
+    .stack-tags::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cta-strip {
+      padding: var(--space-xl) 0;
     }
 
     .cta-inner {
@@ -435,7 +475,7 @@ const techGroups = [
     }
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 400px) {
     .expertise-grid {
       grid-template-columns: 1fr;
     }
