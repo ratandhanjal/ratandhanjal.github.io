@@ -130,6 +130,7 @@ const { Content } = await render(post);
     display: block;
   }
 
+  /* ── Mobile (≤ 600px) ── */
   @media (max-width: 600px) {
     .header-content {
       flex-direction: column-reverse;
@@ -140,6 +141,49 @@ const { Content } = await render(post);
       width: 100%;
       height: 200px;
     }
+    .article-container {
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-2xl);
+    }
+    .article-content {
+      font-size: 1rem;
+    }
+    .article-content :global(img) {
+      border-radius: var(--radius-sm);
+      margin: var(--space-lg) 0;
+    }
+    .article-content :global(img[src*='Thanks_to_my_car']),
+    .article-content :global(img[src*='moti_daman_fort_2']),
+    .article-content :global(img[src*='moti_daman_fort_3']) {
+      max-height: 55vh;
+    }
+    .article-content :global(table) {
+      font-size: 0.85rem;
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .article-content :global(th),
+    .article-content :global(td) {
+      padding: var(--space-xs) var(--space-sm);
+      white-space: nowrap;
+    }
+    .article-content :global(blockquote) {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.97rem;
+    }
+  }
+
+  /* ── Tablet (601px – 900px) ── */
+  @media (min-width: 601px) and (max-width: 900px) {
+    .article-container {
+      padding-top: var(--space-xl);
+    }
+    .article-content :global(img[src*='Thanks_to_my_car']),
+    .article-content :global(img[src*='moti_daman_fort_2']),
+    .article-content :global(img[src*='moti_daman_fort_3']) {
+      max-height: 65vh;
+    }
   }
 
   /* Markdown Content Styling */
@@ -149,19 +193,58 @@ const { Content } = await render(post);
     color: var(--text-color);
   }
 
-  /* Inline Image Styling */
+  /* ── Image Styling — Responsive, High Quality ── */
   .article-content :global(img) {
+    display: block;
     max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: var(--radius-md);
-    margin: var(--space-xl) 0;
+    margin: var(--space-xl) auto;
     border: 1px solid var(--border-color);
     cursor: zoom-in;
-    transition: transform var(--transition-fast);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    /* Crisp rendering for all display densities */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* Preserve aspect ratio naturally */
+    object-fit: cover;
+    background-color: var(--bg-color-secondary);
   }
-  
+
+  /* Portrait images (tall) — cap height so they don't dominate the page */
+  .article-content :global(img[src*='Thanks_to_my_car']),
+  .article-content :global(img[src*='moti_daman_fort_2']),
+  .article-content :global(img[src*='moti_daman_fort_3']) {
+    max-height: 70vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Cover / hero image — full width with aspect ratio */
+  .article-content :global(img[src*='road_trip_cover']) {
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+  }
+
+  [data-theme='dark'] .article-content :global(img) {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    border-color: var(--border-color);
+  }
+
   .article-content :global(img:hover) {
-    transform: scale(1.02);
+    transform: scale(1.015);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  }
+
+  [data-theme='dark'] .article-content :global(img:hover) {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
   }
 
   .article-content :global(h2) {
@@ -225,13 +308,58 @@ const { Content } = await render(post);
   }
 
   .article-content :global(blockquote) {
-    border-left: 4px solid var(--border-color-hover);
-    padding-left: var(--space-lg);
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: var(--space-lg);
+    border-left: 3px solid var(--border-color-hover);
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-xl) 0;
+    background-color: var(--bg-color-secondary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
     font-style: italic;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* ── Responsive Table ── */
+  .article-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-xl) 0;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+
+  .article-content :global(th) {
+    background-color: var(--bg-color-secondary);
+    color: var(--text-color);
+    font-weight: 600;
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    border-bottom: 2px solid var(--border-color);
+    letter-spacing: 0.01em;
+  }
+
+  .article-content :global(td) {
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+  }
+
+  .article-content :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .article-content :global(tr:hover td) {
+    background-color: var(--bg-color-secondary);
+    transition: background-color var(--transition-fast);
+  }
+
+  /* Wrap table in scroll container on mobile */
+  .article-content :global(table) {
+    display: table;
+    overflow-x: auto;
   }
 
   .article-footer {
