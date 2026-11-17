@@ -65,6 +65,9 @@
       "gym": true,
       "reading": true,
       "github": false
+    },
+    "2026-11-17": {
+      "gym": true
     }
   }
 }
